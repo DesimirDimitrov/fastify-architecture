@@ -2,7 +2,10 @@
   "extends": "fastify-tsconfig",
   "compilerOptions": {
     "outDir": "dist",
-    "sourceMap": true
+    "sourceMap": true,
+
+    // https://esbuild.github.io/content-types/#es-module-interop
+    "esModuleInterop": true
   },
   "include": ["src/**/*.ts"]
 }

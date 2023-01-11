@@ -5,10 +5,10 @@ This project was bootstrapped with [Fastify-CLI](https://www.npmjs.com/package/f
 ```bash
 npm install fastify-cli --global
 fastify generate . --lang=ts
+fastify eject --lang=ts
 ```
 
 To learn Fastify, check out the [Fastify documentation](https://www.fastify.io/docs/latest/).
-
 
 # Installation
 
@@ -31,7 +31,7 @@ If you prefer to use WSL, just follow the steps in the official documentations:
 nohup sudo -b dockerd < /dev/null > dockerd.log 2>&1
 ```
 3. [Install Remote Development extension pack](https://code.visualstudio.com/docs/remote/wsl#_installation) (Required only if you are using VS Code)
-4. Use the already prepared [Dev Container](https://code.visualstudio.com/docs/devcontainers/containers#_installation)
+- Use the already prepared [Dev Container](https://code.visualstudio.com/docs/devcontainers/containers#_installation)
 
 # Available Scripts
 
