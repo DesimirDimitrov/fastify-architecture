@@ -1,4 +1,4 @@
-# Fastify Architecture
+# Fastify Architecture (Lamungi Framework)
 
 This project was bootstrapped with [Fastify-CLI](https://www.npmjs.com/package/fastify-cli).
 
