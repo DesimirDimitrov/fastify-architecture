@@ -28,7 +28,9 @@
     "@fastify/sensible": "^5.0.0",
     "fastify": "^4.0.0",
     "fastify-cli": "^5.7.0",
-    "fastify-plugin": "^4.0.0"
+    "fastify-plugin": "^4.0.0",
+    "fluent-json-schema": "^4.0.0",
+    "http-status-codes": "^2.2.0"
   },
   "devDependencies": {
     "@types/node": "^18.0.0",
