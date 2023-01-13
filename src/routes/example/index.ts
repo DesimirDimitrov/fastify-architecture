@@ -28,11 +28,7 @@ const root: FastifyPluginAsyncTypebox = async (
       },
     },
     async function(request, reply) {
-      console.log(request.body.name);
-
-      reply
-        .status(StatusCodes.CREATED)
-        .send({ message: examplePOSTBodyJsonSchema });
+      reply.status(StatusCodes.CREATED).send({ message: request.body.name });
     }
   );
 };

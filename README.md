@@ -56,23 +56,7 @@ Run the test cases.
 
 ## Notes
 
-- I want to validate the GET request (using fluent-json-schema)
-  I want to validate only param "name" to be string
-  In business folder create new folder example with folder schemas and put the schemas for reuse
+Todo
 
-```js
-const queryStringJsonSchema = ;
-const schema = {
-  querystring: queryStringJsonSchema,
-};
+## Swagger
 
-fastify.get(
-    "/",
-    {
-      schema,
-    },
-    async function(request, reply) {
-      return { root: request.query };
-    }
-  );
-```
