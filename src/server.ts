@@ -1,3 +1,4 @@
+import { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
 // Read the .env file.
 import * as dotenv from "dotenv";
 dotenv.config();
@@ -11,23 +12,26 @@ import closeWithGrace from "close-with-grace";
 // Instantiate Fastify with some config
 const app = Fastify({
   logger: true,
-});
+}).withTypeProvider<TypeBoxTypeProvider>();
 
 // Register your application as a normal plugin.
 app.register(import("./app"));
 
-// delay is the number of milliseconds for the graceful close to finish 
-const closeListeners = closeWithGrace({ delay: parseInt(process.env.FASTIFY_CLOSE_GRACE_DELAY) || 500 }, async function ({ signal, err, manual }) {
-  if (err) {
-    app.log.error(err)
-  }
-  await app.close()
-} as closeWithGrace.CloseWithGraceAsyncCallback)
+// delay is the number of milliseconds for the graceful close to finish
+const closeListeners = closeWithGrace(
+  { delay: parseInt(process.env.FASTIFY_CLOSE_GRACE_DELAY) || 500 },
+  async function({ signal, err, manual }) {
+    if (err) {
+      app.log.error(err);
+    }
+    await app.close();
+  } as closeWithGrace.CloseWithGraceAsyncCallback
+);
 
-app.addHook('onClose', async (instance, done) => {
-  closeListeners.uninstall()
-  done()
-})
+app.addHook("onClose", async (instance, done) => {
+  closeListeners.uninstall();
+  done();
+});
 
 // Start listening.
 app.listen({ port: parseInt(process.env.PORT) || 3000 }, (err: any) => {

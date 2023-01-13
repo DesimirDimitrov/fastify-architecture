@@ -1,12 +1,15 @@
-import { FastifyPluginAsync } from "fastify";
-
 // Schemas
 import { exampleGETQueryStringJsonSchema } from "../../business/example/schemas/exampleGETQueryStringJsonSchema";
-import { examplePOSTBodyJsonSchema } from "./../../business/example/schemas/examplePOSTBodyJsonSchema";
+//import { examplePOSTBodyJsonSchema } from "./../../business/example/schemas/examplePOSTBodyJsonSchema";
 
-import { ReasonPhrases, StatusCodes } from "http-status-codes";
+import { StatusCodes } from "http-status-codes";
+import { examplePOSTBodyJsonSchema } from "../../business/example/schemas/examplePOSTBodyJsonSchema";
+import { FastifyPluginAsyncTypebox } from "@fastify/type-provider-typebox";
 
-const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
+const root: FastifyPluginAsyncTypebox = async (
+  fastify,
+  opts
+): Promise<void> => {
   fastify.get(
     "/",
     {
@@ -20,12 +23,16 @@ const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
   fastify.post(
     "/",
     {
-      schema: { body: examplePOSTBodyJsonSchema },
+      schema: {
+        body: examplePOSTBodyJsonSchema,
+      },
     },
     async function(request, reply) {
+      console.log(request.body.name);
+
       reply
         .status(StatusCodes.CREATED)
-        .send({ message: ReasonPhrases.CREATED });
+        .send({ message: examplePOSTBodyJsonSchema });
     }
   );
 };

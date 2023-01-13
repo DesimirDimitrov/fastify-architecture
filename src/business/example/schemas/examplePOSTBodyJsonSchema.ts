@@ -1,3 +1,5 @@
-import S from "fluent-json-schema";
+import { Type } from "@sinclair/typebox";
 
-export const examplePOSTBodyJsonSchema = S.object().prop("name", S.string());
+export const examplePOSTBodyJsonSchema = Type.Object({
+  name: Type.String(),
+});
