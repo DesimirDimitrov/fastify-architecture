@@ -60,3 +60,24 @@ Todo
 
 ## Swagger
 
+Use Postman. TS is not working well.
+
+## Prisma
+
+Standards:
+Table name: plural lower case, snakeCase
+Columns: lower case, snakeCase
+
+```js
+model Example {
+  id          Int     @id @default(autoincrement())
+  name        String?
+  moreDetails String? @map("more_details")
+
+  @@map("examples")
+}
+```
+
+## Naming conventions
+
+exampleGETQueryStringJsonSchema -> Name of the bussines object

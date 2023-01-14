@@ -1,9 +1,9 @@
 // Schemas
+import { examplePOSTBodyJsonSchema } from "../../business/example/schemas/examplePOSTBodyJsonSchema";
 import { exampleGETQueryStringJsonSchema } from "../../business/example/schemas/exampleGETQueryStringJsonSchema";
-//import { examplePOSTBodyJsonSchema } from "./../../business/example/schemas/examplePOSTBodyJsonSchema";
+import { prisma } from "../../modules/db/db";
 
 import { StatusCodes } from "http-status-codes";
-import { examplePOSTBodyJsonSchema } from "../../business/example/schemas/examplePOSTBodyJsonSchema";
 import { FastifyPluginAsyncTypebox } from "@fastify/type-provider-typebox";
 
 const root: FastifyPluginAsyncTypebox = async (
@@ -16,7 +16,11 @@ const root: FastifyPluginAsyncTypebox = async (
       schema: { querystring: exampleGETQueryStringJsonSchema },
     },
     async function(request, reply) {
-      return { root: request.query };
+      const data = await prisma.example.findMany({
+        skip: 3,
+        take: 4,
+      });
+      return { data };
     }
   );
 
@@ -28,7 +32,11 @@ const root: FastifyPluginAsyncTypebox = async (
       },
     },
     async function(request, reply) {
-      reply.status(StatusCodes.CREATED).send({ message: request.body.name });
+      const exampleRecord = await prisma.example.create({
+        data: { name: request.body.name },
+      });
+
+      reply.status(StatusCodes.CREATED).send(exampleRecord);
     }
   );
 };

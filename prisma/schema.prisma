@@ -11,6 +11,9 @@ datasource db {
 }
 
 model Example {
-  id   Int     @id @default(autoincrement())
-  name String?
+  id          Int     @id @default(autoincrement())
+  name        String?
+  moreDetails String? @map("more_details")
+
+  @@map("examples")
 }
