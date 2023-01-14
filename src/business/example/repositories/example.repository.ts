@@ -5,8 +5,12 @@ export class ExampleRepository {
     return await prisma.example.findMany();
   }
 
-  public async find(limit: number, ofset: number, orderBy: any, filterBy: any) {
+  public async find() {
     return await prisma.example.findMany();
+  }
+
+  public async findRaw() {
+    return await prisma.$queryRaw`SELECT id FROM examples`;
   }
 
   public async create(data: Object) {
