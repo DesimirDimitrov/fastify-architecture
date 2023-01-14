@@ -29,6 +29,7 @@
     "@fastify/swagger": "^8.2.1",
     "@fastify/type-provider-json-schema-to-ts": "^2.2.2",
     "@fastify/type-provider-typebox": "^2.4.0",
+    "@prisma/client": "^4.8.1",
     "@sinclair/typebox": "^0.25.20",
     "fastify": "^4.0.0",
     "fastify-cli": "^5.7.1",
