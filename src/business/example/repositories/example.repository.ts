@@ -10,7 +10,7 @@ export class ExampleRepository {
   async find(page: number, limit: number): Promise<[Example[], number]> {
     const { cursor, skip } = new PaginationBuilder(page, limit);
 
-    const [result, totalRecords] = await prisma.$transaction([
+    const [result, totalItems] = await prisma.$transaction([
       prisma.example.findMany({
         take: limit,
         skip: skip,
@@ -24,7 +24,7 @@ export class ExampleRepository {
       prisma.example.count(),
     ]);
 
-    return [result, totalRecords];
+    return [result, totalItems];
   }
 
   findRaw() {

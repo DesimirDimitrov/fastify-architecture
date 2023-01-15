@@ -1,3 +1,4 @@
+import { PaginationResponse } from "./../../modules/response/paginationResponse";
 import { ExampleService } from "./../../business/example/services/example.service";
 import { ExampleCreateDTO } from "../../business/example/dtos/example-create.dto";
 import { ExampleRepository } from "../../business/example/repositories/example.repository";
@@ -20,17 +21,9 @@ const root: FastifyPluginAsyncTypebox = async (
     async function(request, reply) {
       const { page, limit } = request.query;
       const exampleRepo = new ExampleRepository();
-      const [result, totalRecords] = await exampleRepo.find(page, limit);
+      const [items, totalItems] = await exampleRepo.find(page, limit);
 
-      return {
-        data: result,
-        meta: {
-          totalResults: totalRecords,
-          currentPage: page,
-          limit: limit,
-          totalPages: Math.round(totalRecords / limit),
-        },
-      };
+      return PaginationResponse.send(items, totalItems, page, limit);
     }
   );
 
