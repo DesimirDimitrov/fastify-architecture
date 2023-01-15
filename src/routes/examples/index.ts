@@ -1,4 +1,6 @@
-import { ExampleRepository } from "./../../business/example/repositories/example.repository";
+import { ExampleService } from "./../../business/example/services/example.service";
+import { ExampleCreateDTO } from "../../business/example/dtos/example-create.dto";
+import { ExampleRepository } from "../../business/example/repositories/example.repository";
 // Schemas
 import { examplePOSTBodyJsonSchema } from "../../business/example/schemas/examplePOSTBodyJsonSchema";
 import { exampleGETQueryStringJsonSchema } from "../../business/example/schemas/exampleGETQueryStringJsonSchema";
@@ -16,14 +18,10 @@ const root: FastifyPluginAsyncTypebox = async (
       schema: { querystring: exampleGETQueryStringJsonSchema },
     },
     async function(request, reply) {
-      try {
-        const exampleRepo = new ExampleRepository();
-        const data = await exampleRepo.find();
+      const exampleRepo = new ExampleRepository();
+      const data = await exampleRepo.find();
 
-        return { data };
-      } catch (error) {
-        reply.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
-      }
+      return { data };
     }
   );
 
@@ -35,16 +33,13 @@ const root: FastifyPluginAsyncTypebox = async (
       },
     },
     async function(request, reply) {
-      try {
-        const exampleRepo = new ExampleRepository();
-        const exampleRecord = await exampleRepo.create({
-          name: request.body.name.trim(),
-        });
+      const exampleCreateDTO = new ExampleCreateDTO(request.body);
+      const exampleRecord = await ExampleService.create(
+        exampleCreateDTO,
+        new ExampleRepository()
+      );
 
-        reply.status(StatusCodes.CREATED).send(exampleRecord);
-      } catch (error) {
-        reply.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
-      }
+      reply.status(StatusCodes.CREATED).send(exampleRecord);
     }
   );
 };
