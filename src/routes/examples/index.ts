@@ -18,8 +18,9 @@ const root: FastifyPluginAsyncTypebox = async (
       schema: { querystring: exampleGETQueryStringJsonSchema },
     },
     async function(request, reply) {
+      const { page, limit } = request.query;
       const exampleRepo = new ExampleRepository();
-      const data = await exampleRepo.find();
+      const data = await exampleRepo.find(page, limit);
 
       return { data };
     }
