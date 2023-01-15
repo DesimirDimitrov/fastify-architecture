@@ -7,7 +7,7 @@
   },
   "scripts": {
     "test": "tsc && tsc -p test/tsconfig.json && tap --ts \"test/**/*.test.ts\"",
-    "dev": "tsx watch ./src/server.ts",
+    "dev": "tsx watch --inspect ./src/server.ts",
     "build": "tsc",
     "start": "NODE_ENV=production npm run build && node ./dist/server.js",
     "typecheck": "tsc --noEmit"

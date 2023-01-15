@@ -20,9 +20,17 @@ const root: FastifyPluginAsyncTypebox = async (
     async function(request, reply) {
       const { page, limit } = request.query;
       const exampleRepo = new ExampleRepository();
-      const data = await exampleRepo.find(page, limit);
+      const [result, totalRecords] = await exampleRepo.find(page, limit);
 
-      return { data };
+      return {
+        data: result,
+        meta: {
+          totalResults: totalRecords,
+          currentPage: page,
+          limit: limit,
+          totalPages: Math.round(totalRecords / limit),
+        },
+      };
     }
   );
 
