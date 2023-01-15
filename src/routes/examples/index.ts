@@ -10,40 +10,40 @@ import { StatusCodes } from "http-status-codes";
 import { FastifyPluginAsyncTypebox } from "@fastify/type-provider-typebox";
 
 const root: FastifyPluginAsyncTypebox = async (
-  fastify,
-  opts
+    fastify,
+    opts
 ): Promise<void> => {
-  fastify.get(
-    "/",
-    {
-      schema: { querystring: exampleGETQueryStringJsonSchema },
-    },
-    async function(request, reply) {
-      const { page, limit } = request.query;
-      const exampleRepo = new ExampleRepository();
-      const [items, totalItems] = await exampleRepo.find(page, limit);
+    fastify.get(
+        "/",
+        {
+            schema: { querystring: exampleGETQueryStringJsonSchema }
+        },
+        async function(request, reply) {
+            const { page, limit } = request.query;
+            const exampleRepo = new ExampleRepository();
+            const [items, totalItems] = await exampleRepo.find(page, limit);
 
-      return PaginationResponse.send(items, totalItems, page, limit);
-    }
-  );
+            return PaginationResponse.send(items, totalItems, page, limit);
+        }
+    );
 
-  fastify.post(
-    "/",
-    {
-      schema: {
-        body: examplePOSTBodyJsonSchema,
-      },
-    },
-    async function(request, reply) {
-      const exampleCreateDTO = new ExampleCreateDTO(request.body);
-      const exampleRecord = await ExampleService.create(
-        exampleCreateDTO,
-        new ExampleRepository()
-      );
+    fastify.post(
+        "/",
+        {
+            schema: {
+                body: examplePOSTBodyJsonSchema
+            }
+        },
+        async function(request, reply) {
+            const exampleCreateDTO = new ExampleCreateDTO(request.body);
+            const exampleRecord = await ExampleService.create(
+                exampleCreateDTO,
+                new ExampleRepository()
+            );
 
-      reply.status(StatusCodes.CREATED).send(exampleRecord);
-    }
-  );
+            reply.status(StatusCodes.CREATED).send(exampleRecord);
+        }
+    );
 };
 
 export default root;
