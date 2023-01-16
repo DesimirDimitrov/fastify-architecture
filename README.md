@@ -81,3 +81,7 @@ model Example {
 ## Naming conventions
 
 exampleGETQueryStringJsonSchema -> Name of the bussines object
+
+## Server deployment
+
+fastify-lamungi.desimir.eu/api
