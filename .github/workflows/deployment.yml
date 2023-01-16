@@ -27,6 +27,7 @@ jobs:
     - run: npm i
     - run: git reset --hard
     - run: git checkout .
+    - run: git fetch --all
     - run: git pull
     - run: npm run build
     - run: pm2 restart FastifyLamungiAPI
