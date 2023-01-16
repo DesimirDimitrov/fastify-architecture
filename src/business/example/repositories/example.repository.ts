@@ -1,6 +1,5 @@
 import { PaginationBuilder } from "./../../../utils/pagination-builder";
 import { prisma } from "../../../modules/database/db";
-import { Example } from "@prisma/client";
 
 export class ExampleRepository {
   findAll() {
