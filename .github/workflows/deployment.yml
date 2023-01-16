@@ -30,4 +30,4 @@ jobs:
     - run: git fetch --all
     - run: git pull
     - run: npm run build
-    - run: pm2 restart FastifyLamungiAPI
+    - run: pm2 start ecosystem.config.js --update-env
