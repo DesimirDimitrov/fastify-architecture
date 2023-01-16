@@ -7,7 +7,7 @@ export class ExampleRepository {
     return prisma.example.findMany();
   }
 
-  async find(page: number, limit: number): Promise<[Example[], number]> {
+  async find(page: number, limit: number): Promise<[any[], number]> {
     const { cursor, skip } = new PaginationBuilder(page, limit);
 
     const [result, totalItems] = await prisma.$transaction([
@@ -15,13 +15,13 @@ export class ExampleRepository {
         take: limit,
         skip: skip,
         cursor: {
-          id: cursor,
+          id: cursor
         },
         orderBy: {
-          id: "asc",
-        },
+          id: "asc"
+        }
       }),
-      prisma.example.count(),
+      prisma.example.count()
     ]);
 
     return [result, totalItems];
@@ -33,7 +33,7 @@ export class ExampleRepository {
 
   create(data: Record<string, any>) {
     return prisma.example.create({
-      data: data,
+      data: data
     });
   }
 }
