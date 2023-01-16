@@ -24,11 +24,10 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: cd ~/sites/fastify-lamungi/api
+    - run: cd ~/actions-runner/fastifylamungiapi/fastify-architecture/fastify-architecture/dist
     - run: npm i
     - run: git reset --hard
     - run: git checkout .
     - run: git fetch --all
     - run: git pull
-    - run: npm run build
     - run: pm2 restart FastifyLamungiAPI
