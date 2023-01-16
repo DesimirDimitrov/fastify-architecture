@@ -26,5 +26,5 @@ jobs:
         cache: 'npm'
     - run: npm i
     - run: npx prisma generate
-    - run: cp -fr /home/desimir/sites/fastify-lamungi/.env /home/desimir/actions-runner/fastifylamungiapi/fastify-architecture/fastify-architecture
+    - run: cp -fr /home/desimir/sites/fastify-lamungi/api/.env /home/desimir/actions-runner/fastifylamungiapi/fastify-architecture/fastify-architecture
     - run: pm2 restart FastifyLamungiAPI --update-env
