@@ -1,11 +1,19 @@
-import { test } from 'tap'
-import { build } from '../helper'
+describe('route', async () => {
+	it('GET `/`', async ({fastify}) => {
+		const response = await fastify.inject({
+			method: 'GET',
+			url: '/',
+		})
 
-test('default root route', async (t) => {
-  const app = await build(t)
+		expect(response.statusCode).toEqual(404)
+	})
 
-  const res = await app.inject({
-    url: '/'
-  })
-  t.same(JSON.parse(res.payload), { root: true })
+	it('GET `/api`', async ({fastify}) => {
+		const response = await fastify.inject({
+			method: 'GET',
+			url: '/api',
+		})
+
+		expect(response.json()).toEqual({message: "success"})
+	})
 })

@@ -6,8 +6,12 @@
     "test": "test"
   },
   "scripts": {
-    "test": "tsc && tsc -p test/tsconfig.json && tap --ts \"test/**/*.test.ts\"",
-    "dev": "tsx watch --inspect ./src/server.ts",
+    "pretest": "node ./test/vitest.js on",
+    "test": "vitest",
+    "posttest": "node ./test/vitest.js off",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage",
+    "dev": "tsx watch ./src/server.ts",
     "build": "tsc",
     "start": "cross-env NODE_ENV=production npm run build && node ./dist/server.js",
     "typecheck": "tsc --noEmit"
@@ -33,21 +37,25 @@
     "@fastify/type-provider-typebox": "^2.4.0",
     "@prisma/client": "^4.8.1",
     "@sinclair/typebox": "^0.25.20",
+    "@vitest/coverage-c8": "^0.27.0",
+    "@vitest/ui": "^0.27.0",
+    "dotenv": "^16.0.3",
     "fastify": "^4.0.0",
-    "fastify-cli": "^5.7.1",
     "fastify-plugin": "^4.0.0",
     "fastify-rate-limit": "^5.9.0",
     "fluent-json-schema": "^4.0.0",
-    "http-status-codes": "^2.2.0"
+    "http-status-codes": "^2.2.0",
+    "vite": "^4.0.4",
+    "vitest": "^0.27.1"
   },
   "devDependencies": {
     "@types/fastify-rate-limit": "^2.1.0",
     "@types/node": "^18.0.0",
-    "@types/tap": "^15.0.5",
+    "cjstoesm": "^2.1.2",
     "cross-env": "^7.0.3",
     "fastify-tsconfig": "^1.0.1",
-    "tap": "^16.1.0",
     "tsx": "^3.12.2",
-    "typescript": "^4.5.4"
+    "typescript": "^4.5.4",
+    "vitest-mock-extended": "^1.0.8"
   }
 }
