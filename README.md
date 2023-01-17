@@ -83,5 +83,5 @@ model Example {
 exampleGETQueryStringJsonSchema -> Name of the bussines object
 
 ## Server deployment
-
+GitHub Actions CI/CD, runner deployed on Ubuntu 22.04 server
 fastify-lamungi.desimir.eu/api
