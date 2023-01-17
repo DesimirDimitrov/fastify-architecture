@@ -24,7 +24,7 @@ const app: FastifyPluginAsync<AppOptions> = async (
   void fastify.register(AutoLoad, {
     dir: join(__dirname, "plugins"),
     options: opts,
-    ignoreFilter: /\.test\.ts$/
+    ignoreFilter: /\.test\.(ts|js)$/
   });
 
   // This loads all plugins defined in routes
